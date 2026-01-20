@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 from scipy.stats import norm
 
 # Generate values
-x = np.linspace(-4, 4, 1000)
+x = np.linspace(-4, 4, 5000)
 mean = 0
 std_dev = 1
 
