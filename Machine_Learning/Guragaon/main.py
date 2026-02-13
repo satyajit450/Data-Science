@@ -26,7 +26,7 @@ def build_pipeline(num_attributes , cat_attributes) :
     ])
 
     full_pipeline = ColumnTransformer ([
-        ("Num",num_pipeline),num_attributes,
+        ("Num",num_pipeline,num_attributes),
         ("Cat",Cat_pipeline,cat_attributes)
     ])
     return full_pipeline
@@ -45,21 +45,43 @@ if not os.path.exists(MODEL_FILE) :
 
     for train_index,test_index in split.split(housing,housing["income_cat"]) :
         train_data = housing.loc[train_index]
-        test_data = housing.loc[test_index]
+        housing.loc[test_index].drop("income_cat", axis=1).to_csv("input.csv",index=False)
 
 
-    for sett in (train_data, test_data):
-        sett.drop(columns="income_cat", axis=1, inplace=True)
+    train_data.drop(columns="income_cat", inplace=True)
 
+    
     housing = train_data.copy()
     # print(train_data)
-
-
     Categorical = ["ocean_proximity"]
-    Numerical = housing.drop(columns="ocean_proximity").columns
+    Numerical = [col for col in housing.columns if col not in Categorical + ["median_house_value"]]
+
+    housing_features = housing[Numerical + Categorical]
+    housing_labels = housing["median_house_value"]
+
 
     # print(train_data)
 
-    housing_features = housing.drop("median_house_value",axis=1)
-    housing_labels = housing["median_house_value"]
-    print(housing_labels)
+    # print(housing_labels)
+
+    pipeline = build_pipeline(Numerical,Categorical)
+    data_prepared = pipeline.fit_transform(housing_features)
+
+    model = RandomForestRegressor(random_state=42)
+    model.fit(data_prepared,housing_labels)
+
+    joblib.dump(model,MODEL_FILE)
+    joblib.dump(pipeline,PIPELINE_FILE)
+    print("Model trained and saved.")
+
+else :
+    model = joblib.load(MODEL_FILE)
+    pipeline = joblib.load(PIPELINE_FILE)
+
+    input_data = pd.read_csv("input.csv")
+    tranformed = pipeline.transform(input_data)
+    prediction = model.predict(tranformed)
+    input_data["median_house_value"] = prediction
+
+    input_data.to_csv("output.csv", index=False)
+    print("Inference complete. Results saved to output.csv")
