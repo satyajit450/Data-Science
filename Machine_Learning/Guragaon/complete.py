@@ -114,5 +114,5 @@ print("\nCross Validation Scores for Linear Regression:",lin_scores)
 Dec_scores = -cross_val_score(Dec_reg,data_prepared,housing_label,scoring="neg_root_mean_squared_error",cv=10)
 print("Cross Validation Scores for Decision Tree Regression:",Dec_scores)
 # Cross Validation for Random Forest Regression
-Ran_scores =  cross_val_score(Ran_reg,data_prepared,housing_label,scoring="neg_root_mean_squared_error",cv=10)
+Ran_scores =  -cross_val_score(Ran_reg,data_prepared,housing_label,scoring="neg_root_mean_squared_error",cv=10)
 print("Cross Validation Scores for Random Forest Regression:",Ran_scores)
