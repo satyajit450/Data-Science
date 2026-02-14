@@ -53,11 +53,11 @@ if not os.path.exists(MODEL_FILE) :
     
     housing = train_data.copy()
     # print(train_data)
-    Categorical = ["ocean_proximity"]
-    Numerical = [col for col in housing.columns if col not in Categorical + ["median_house_value"]]
-
-    housing_features = housing[Numerical + Categorical]
+    housing_features = housing.drop("median_house_value", axis=1)
     housing_labels = housing["median_house_value"]
+
+    Numerical = [col for col in housing_features.columns if col != "ocean_proximity"]
+    Categorical = ["ocean_proximity"]
 
 
     # print(train_data)
@@ -77,7 +77,7 @@ if not os.path.exists(MODEL_FILE) :
 else :
     model = joblib.load(MODEL_FILE)
     pipeline = joblib.load(PIPELINE_FILE)
-
+    
     input_data = pd.read_csv("input.csv")
     tranformed = pipeline.transform(input_data)
     prediction = model.predict(tranformed)
