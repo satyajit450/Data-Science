@@ -8,4 +8,4 @@ def perceptron(x1,x2,w1,w2,b) :
 print(perceptron(0, 0, 1, 1, -1.5))  # Expected: 0
 print(perceptron(0, 1, 1, 1, -1.5))  # Expected: 0
 print(perceptron(1, 0, 1, 1, -1.5))  # Expected: 0
-print(perceptron(1, 1, 1, 1, -1.5))  # Expected: 1
+print(perceptron(1, 1, 1, 1, -1.5))  
