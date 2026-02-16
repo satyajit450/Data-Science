@@ -11,8 +11,8 @@ from sklearn.compose import ColumnTransformer# type: ignore
 from sklearn.ensemble import RandomForestRegressor# type: ignore
 
 
-# MODEL_FILE = "model.pkl"
-# PIPELINE_FILE = "pipeline.pkl"   
+MODEL_FILE = "model.pkl"
+PIPELINE_FILE = "pipeline.pkl"   
 
 def build_pipeline(num_attributes , cat_attributes) :
 
@@ -84,3 +84,5 @@ else :
 
     input_data.to_csv("output.csv", index=False)
     print("Inference complete. Results saved to output.csv")
+
+print("Done by Satyajit ")
