@@ -68,7 +68,7 @@ if not os.path.exists(MODEL_FILE) :
     model = RandomForestRegressor(random_state=42)
     model.fit(data_prepared,housing_labels)
 
-    joblib.dump(model,MODEL_FILE)
+    joblib.dump(model,MODEL_FILE,compress=3)
     joblib.dump(pipeline,PIPELINE_FILE)
     print("Model trained and saved.")
 
