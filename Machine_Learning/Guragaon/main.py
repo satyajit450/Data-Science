@@ -24,7 +24,6 @@ def build_pipeline(num_attributes , cat_attributes) :
     Cat_pipeline = Pipeline([
     ("one_hot_encoder",OneHotEncoder(handle_unknown="ignore")),
     ])
-
     full_pipeline = ColumnTransformer ([
         ("Num",num_pipeline,num_attributes),
         ("Cat",Cat_pipeline,cat_attributes)
