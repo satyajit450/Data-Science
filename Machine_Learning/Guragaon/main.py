@@ -2,7 +2,7 @@ import os
 import joblib # type: ignore
 import numpy as np # type: ignore
 import pandas as pd# type: ignore
-# import matplotlib.pyplot as plt# type: ignore
+import matplotlib.pyplot as plt# type: ignore
 from sklearn.preprocessing import MinMaxScaler, OneHotEncoder# type: ignore
 from sklearn.model_selection import StratifiedShuffleSplit# type: ignore
 from sklearn.impute import SimpleImputer# type: ignore
