@@ -97,7 +97,7 @@ print("Predictions for first 5 rows:", Ran_reg.predict(data_prepared.iloc[:5])) 
 
 # Mean Squared Error for Linear Regression
 lin_predictions = lin_reg.predict(data_prepared)
-print("\nMean Squared Error for Linear Regression:",root_mean_squared_error(housing_label,lin_predictions))   ## (label,prediction)
+print("\nMean Squared Error for Linear Regression:",root_mean_squared_error(housing_label,lin_predictions))
 
 # Mean Squared Error for Decision Tree Regression
 Dec_predictions = Dec_reg.predict(data_prepared)
