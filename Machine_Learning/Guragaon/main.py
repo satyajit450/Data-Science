@@ -1,6 +1,6 @@
 import os
 import joblib # type: ignore
-import numpy as np # type: ignore
+import numpy as np# type: ignore
 import pandas as pd# type: ignore
 import matplotlib.pyplot as plt# type: ignore
 from sklearn.preprocessing import MinMaxScaler, OneHotEncoder# type: ignore
@@ -77,7 +77,8 @@ else :
     pipeline = joblib.load(PIPELINE_FILE)
     
     input_data = pd.read_csv("input.csv")
-    tranformed = pipeline.transform(input_data)
+    tranformed = pipeline.transform(input_data)    #⚠️ Note: yaha fit_transform nahi use hua
+                                                     #sirf transform (because pipeline already trained hai)
     prediction = model.predict(tranformed)
     input_data["median_house_value"] = prediction
 
